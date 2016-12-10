@@ -26,8 +26,13 @@ var server = http.createServer(function(req, res){
 gun.wsp(server);
 exports.server = server.listen(port, ip);
 
+// setup events on first path 'asdf' 
 var db = gun.get( "asdf" );
-gun.on( (val,field)=>{ console.log( "new field: ", field, "=", val ); } );
-gun.path( "Services" ).map().val( (val,field)=>{ console.log( "service Request: ", field, "=", val ); } );
+gun.on( (val,field)=>{ console.log( "on new field: ", field, "=", val ); } );
+gun.map( (val,field)=>{ console.log( "map new field: ", field, "=", val ); } );
+
+// second path services...
+gun.get( "Services" ).map().val( (val,field)=>{ console.log( "service Request: ", field, "=", val ); } );
+
 
 

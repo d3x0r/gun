@@ -8,7 +8,7 @@ var gun = Gun( gunOpts );
 	var svc = gun.get( 'Services' ).path( "registry" );
 
 	svc.map().val( function(val,field){
-		console.log( "received service request", val, field  );
+		console.log( "client received his own service request", val, field  );
 		//this.put( { serviceID: "1234" } );
 	}).not( ()=>{ console.log( "nothing yet" ); } )
 	// shouldn't have to do a put... just here for later testing... doesn't help.
