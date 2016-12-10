@@ -27,12 +27,14 @@ gun.wsp(server);
 exports.server = server.listen(port, ip);
 
 // setup events on first path 'asdf' 
-var db = gun.get( "asdf" );
-gun.on( (val,field)=>{ console.log( "on new field: ", field, "=", val ); } );
-gun.map( (val,field)=>{ console.log( "map new field: ", field, "=", val ); } );
+var db = gun.get( "nothing" );
+gun.path( "asdf" ).on( (val,field)=>{ console.log( "on new field: ", field, "=", val ); } );
+gun.path( "asdf" ).map( (val,field)=>{ console.log( "map new field: ", field, "=", val ); } );
 
 // second path services...
-gun.get( "Services" ).map().val( (val,field)=>{ console.log( "service Request: ", field, "=", val ); } );
+var svc = gun.get( 'Services' ).path( "registry" );
+svc.map( (val,field)=>{ console.log( "Server Map service Request: ", field, "=", val ); } );
+svc.map().val( (val,field)=>{ console.log( "Server MapVal service Request: ", field, "=", val ); } );
 
 
 
