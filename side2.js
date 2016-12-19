@@ -7,19 +7,26 @@ var gun = Gun( gunOpts );
 
 	var svc = gun.get( 'Services' ).path( "registry" );
 
-	svc.map().val( function(val,field){
-		console.log( "client received his own service request", val, field  );
-		//this.put( { serviceID: "1234" } );
-	}).not( ()=>{ console.log( "nothing yet" ); } )
 	svc.map( function(val,field){
-		console.log( "client map received his own service request", val, field  );
+        	if( typeof( val ) == 'object' ) {
+			console.log( "client map received his own service request", val, field  );
+        	        if( !("ServiceID" in val) )
+	        	        this.put( { ServiceID:1234 } );
+                } else {
+                	console.log( "communication failure." );
+                }
 		//this.put( { serviceID: "1234" } );
-	}).not( ()=>{ console.log( "nothing yet" ); } )
+	})
 	// shouldn't have to do a put... just here for later testing... doesn't help.
 
+	var msg = {};
+        msg[Gun.text.random()] = { name: "Chat" } ;
 
-	setTimeout( ()=>{ svc.put( { serviceName : "Chat" } ); }, 1000 );
 
-	setTimeout( ()=>{ svc.put( { serviceName : "Firewall" } ); }, 1000 );
-	setTimeout( ()=>{ svc.put( { serviceName : "Otherthing" } ); }, 1000 );
+	setTimeout( ()=>{ svc.put( msg ); }, 1000 );
+
+        msg[Gun.text.random()] = { name: "Firewall" } ;
+	setTimeout( ()=>{ svc.put( msg ); }, 1500 );
+        msg[Gun.text.random()] = { name: "OtherThing" } ;
+	setTimeout( ()=>{ svc.put( msg ); }, 2000 );
 

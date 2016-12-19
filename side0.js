@@ -32,9 +32,11 @@ gun.path( "asdf" ).on( (val,field)=>{ console.log( "on new field: ", field, "=",
 gun.path( "asdf" ).map( (val,field)=>{ console.log( "map new field: ", field, "=", val ); } );
 
 // second path services...
-var svc = gun.get( 'Services' ).path( "registry" );
+var svc = gun.get( 'Services' );
 svc.map( (val,field)=>{ console.log( "Server Map service Request: ", field, "=", val ); } );
 svc.map().val( (val,field)=>{ console.log( "Server MapVal service Request: ", field, "=", val ); } );
+svc.path( "registry").map( (val,field)=>{ console.log( "Server Reg Map service Request: ", field, "=", val ); } );
+svc.path( "registry").map().val( (val,field)=>{ console.log( "Server reg MapVal service Request: ", field, "=", val ); } );
 
 
 
