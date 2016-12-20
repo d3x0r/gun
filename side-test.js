@@ -1,6 +1,7 @@
 
 var processes = [];
 
+// rm notnull hubdata.json notnull.services 
 
 var cp = require( 'child_process' );
 var opts = {

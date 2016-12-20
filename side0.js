@@ -28,15 +28,15 @@ exports.server = server.listen(port, ip);
 
 // setup events on first path 'asdf' 
 var db = gun.get( "nothing" );
-gun.path( "asdf" ).on( (val,field)=>{ console.log( "on new field: ", field, "=", val ); } );
-gun.path( "asdf" ).map( (val,field)=>{ console.log( "map new field: ", field, "=", val ); } );
+gun.path( "asdf" ).on( (val,field)=>{ console.log( "(side0, nothing.asdf) on new field: ", field, "=", val ); } );
+gun.path( "asdf" ).map( (val,field)=>{ console.log( "(side0, nothing.asdf) map new field: ", field, "=", val ); } );
 
 // second path services...
 var svc = gun.get( 'Services' );
-svc.map( (val,field)=>{ console.log( "Server Map service Request: ", field, "=", val ); } );
-svc.map().val( (val,field)=>{ console.log( "Server MapVal service Request: ", field, "=", val ); } );
-svc.path( "registry").map( (val,field)=>{ console.log( "Server Reg Map service Request: ", field, "=", val ); } );
-svc.path( "registry").map().val( (val,field)=>{ console.log( "Server reg MapVal service Request: ", field, "=", val ); } );
+svc.map( (val,field)=>{ console.log( "(side0, Services)Server Map service Request: ", field, "=", val ); } );
+svc.map().val( (val,field)=>{ console.log( "(side0, Services)Server MapVal service Request: ", field, "=", val ); } );
+svc.path( "registry").map( (val,field)=>{ console.log( "(side0, Services.registry)Server Reg Map service Request: ", field, "=", val ); } );
+svc.path( "registry").map().val( (val,field)=>{ console.log( "(side0, Services.registry)Server reg MapVal service Request: ", field, "=", val ); } );
 
 
 
